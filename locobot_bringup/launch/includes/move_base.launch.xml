@@ -1,0 +1,49 @@
+<launch>
+    <node pkg="nodelet" type="nodelet" name="safety_controller"
+          args="load kobuki_safety_controller/SafetyControllerNodelet mobile_base_manager">
+        <remap from="safety_controller/cmd_vel"
+               to="cmd_vel_mux/input/safety_controller" />
+        <remap from="safety_controller/events/bumper"
+               to="mobile_base/events/bumper" />
+        <remap from="safety_controller/events/cliff"
+               to="mobile_base/events/cliff" />
+        <remap from="safety_controller/events/wheel_drop"
+               to="mobile_base/events/wheel_drop" />
+    </node>
+
+    <node pkg="nodelet" type="nodelet" name="velocity_smoother"
+          args="load yocs_velocity_smoother/VelocitySmootherNodelet mobile_base_manager">
+        <rosparam command="load" file="$(find locobot_bringup)/param/smoother.yaml" />
+        <remap from="velocity_smoother/smooth_cmd_vel" to="cmd_vel_mux/input/navi" />
+        <remap from="velocity_smoother/odometry"       to="odom" />
+        <remap from="velocity_smoother/robot_cmd_vel"  to="mobile_base/commands/velocity" />
+    </node>
+
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+        <rosparam command="load"
+                  file="$(find locobot_bringup)/param/move_base.yaml" />
+        <rosparam command="load" ns="global_costmap"
+                  file="$(find locobot_bringup)/param/costmap_common.yaml" />
+        <rosparam command="load"
+                  file="$(find locobot_bringup)/param/global_costmap.yaml" />
+        <rosparam command="load"
+                  file="$(find locobot_bringup)/param/global_planner.yaml" />
+        <rosparam command="load"
+                  file="$(find locobot_bringup)/param/navfn_global_planner.yaml" />
+        <rosparam command="load" ns="local_costmap"
+                  file="$(find locobot_bringup)/param/costmap_common.yaml" />   
+        <rosparam command="load"
+                  file="$(find locobot_bringup)/param/local_costmap.yaml" />   
+        <rosparam command="load"
+                  file="$(find locobot_bringup)/param/dwa_local_planner.yaml" />
+
+        <param name="global_costmap/global_frame"     value="map"/>
+        <param name="global_costmap/robot_base_frame" value="base_footprint"/>
+        <param name="local_costmap/global_frame"      value="odom"/>
+        <param name="local_costmap/robot_base_frame"  value="base_footprint"/>
+        <param name="DWAPlannerROS/global_frame_id"   value="odom"/>
+
+        <remap from="cmd_vel" to="velocity_smoother/raw_cmd_vel" />
+        <remap from="scan"    to="scan_filtered" />
+    </node>
+</launch>

@@ -1,0 +1,37 @@
+<launch>
+    <param name="robot_description"
+        textfile="$(find locobot_with_lds_description)/urdf/locobot_with_lds.urdf" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher"
+	      name="robot_state_publisher" />
+
+    <include file="$(find turtlebot_bringup)/launch/includes/mobile_base.launch.xml">
+        <arg name="base" value="kobuki" />
+        <arg name="serialport" value="/dev/kobuki" />
+    </include>
+
+    <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+        <param name="maxUrange" value="3.5" />
+        <param name="maxRange" value="4.0" />
+        <param name="linearUpdate" value="0.5" />
+        <param name="angularUpdate" value="0.436" />
+        <remap from="/scan" to="/scan_filtered" />
+    </node>
+    <include file="$(find turtlebot_navigation)/launch/includes/move_base.launch.xml" />
+
+    <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
+        <arg name="enable_pointcloud" value="false" />
+    </include>
+
+    <node pkg="hls_lfcd_lds_driver" type="hlds_laser_publisher" name="hlds_laser_publisher">
+        <param name="port" value="/dev/hls_lfcd_lds" />
+        <param name="frame_id" value="base_scan" />
+    </node>
+
+    <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter">
+        <rosparam command="load"
+		          file="$(find locobot_bringup)/param/laser_filter.yaml" />
+    </node>
+
+    <param name="use_camera" value="true" />
+    <include file="$(find locobot_control)/launch/dynamixel_controllers.launch" />
+</launch>

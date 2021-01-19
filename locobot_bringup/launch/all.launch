@@ -1,0 +1,65 @@
+<launch>
+    <!-- Robot state -->
+    <param name="robot_description"
+           textfile="$(find locobot_with_lds_description)/urdf/locobot_with_lds.urdf" />
+    <node pkg="robot_state_publisher"
+          type="robot_state_publisher"
+          name="robot_state_publisher" />
+
+    <!-- Mobile base -->
+    <include file="$(find locobot_bringup)/launch/includes/mobile_base.launch.xml" />
+
+    <!-- Dynamixel -->
+    <param name="dynamixel_info"
+           value="$(find locobot_bringup)/param/dynamixel.yaml" />
+    <node name="dynamixel_workbench"
+          pkg="dynamixel_workbench_controllers"
+          type="dynamixel_workbench_controllers"
+          args="/dev/ttyUSB_dyna 1000000">
+        <remap from="/dynamixel_workbench/joint_states" to="/joint_states" />
+    </node>
+
+    <!-- Navigation stack -->
+    <arg name="use_saved_map" default="false" />
+    <group if="$(arg use_saved_map)">
+        <arg name="map_file" />
+        <node pkg="map_server" type="map_server" name="map_server" args="$(arg map_file)" />
+        <node pkg="amcl" type="amcl" name="amcl">
+            <param name="use_map_topic"   value="true" />
+            <param name="initial_pose_x"  value="0.0" />
+            <param name="initial_pose_y"  value="0.0" />
+            <param name="initial_pose_z"  value="0.0" />
+            <param name="laser_max_range" value="3.5" />
+            <param name="laser_max_beam"  value="180" />
+            <param name="laser_z_hit"     value="0.6" />
+            <param name="laser_z_rand"    value="0.4" />
+            <remap from="scan" to="scan_filtered" />
+        </node>
+    </group>
+    <group unless="$(arg use_saved_map)">
+        <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+            <param name="maxUrange"      value="3.5" />
+            <param name="maxRange"       value="4.0" />
+            <param name="linearUpdate"   value="0.5" />
+            <param name="angularUpdate"  value="0.436" />
+            <param name="temporalUpdate" value="10.0" />
+            <remap from="/scan" to="/scan_filtered" />
+        </node>
+    </group>
+    <include file="$(find locobot_bringup)/launch/includes/move_base.launch.xml" />
+
+    <!-- RGBD Camera -->
+    <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
+        <arg name="enable_pointcloud" value="false" />
+    </include>
+
+    <!-- Laser Distance Sensor -->
+    <node pkg="hls_lfcd_lds_driver" type="hlds_laser_publisher" name="hlds_laser_publisher">
+        <param name="port"      value="/dev/hls_lfcd_lds" />
+        <param name="frame_id"  value="base_scan" />
+    </node>
+    <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter">
+        <rosparam command="load"
+                  file="$(find locobot_bringup)/param/laser_filter.yaml" />
+    </node>
+</launch>

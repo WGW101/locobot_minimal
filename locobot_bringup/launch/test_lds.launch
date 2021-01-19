@@ -1,0 +1,13 @@
+<launch>
+    <param name="robot_description" textfile="$(find locobot_with_lds_description)/urdf/locobot_with_lds.urdf" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" />
+
+    <node pkg="hls_lfcd_lds_driver" type="hlds_laser_publisher" name="hlds_laser_publisher">
+        <param name="port" value="/dev/hls_lfcd_lds" />
+        <param name="frame_id" value="base_scan" />
+    </node>
+
+    <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter">
+        <rosparam command="load" file="$(find locobot_bringup)/param/scan_filter_config.yaml" />
+    </node>
+</launch>
