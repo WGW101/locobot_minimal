@@ -1,0 +1,8 @@
+use_map_topic:   true
+initial_pose_x:  0.0
+initial_pose_y:  0.0
+initial_pose_z:  0.0
+laser_max_range: 3.5
+laser_max_beam:  180
+laser_z_hit:     0.6
+laser_z_rand:    0.4

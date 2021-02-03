@@ -25,24 +25,13 @@
         <arg name="map_file" />
         <node pkg="map_server" type="map_server" name="map_server" args="$(arg map_file)" />
         <node pkg="amcl" type="amcl" name="amcl">
-            <param name="use_map_topic"   value="true" />
-            <param name="initial_pose_x"  value="0.0" />
-            <param name="initial_pose_y"  value="0.0" />
-            <param name="initial_pose_z"  value="0.0" />
-            <param name="laser_max_range" value="3.5" />
-            <param name="laser_max_beam"  value="180" />
-            <param name="laser_z_hit"     value="0.6" />
-            <param name="laser_z_rand"    value="0.4" />
+			<rosparam command="load" file="$(find locobot_bringup)/param/amcl.yaml" />
             <remap from="scan" to="scan_filtered" />
         </node>
     </group>
     <group unless="$(arg use_saved_map)">
         <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
-            <param name="maxUrange"      value="3.5" />
-            <param name="maxRange"       value="4.0" />
-            <param name="linearUpdate"   value="0.5" />
-            <param name="angularUpdate"  value="0.436" />
-            <param name="temporalUpdate" value="10.0" />
+			<rosparam command="load" file="$(find locobot_bringup)/param/gmapping.yaml" />
             <remap from="/scan" to="/scan_filtered" />
         </node>
     </group>
