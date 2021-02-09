@@ -1,5 +1,5 @@
 maxUrange:      3.0
-maxRange:       3.5
+maxRange:       4.5
 linearUpdate:   0.5
 angularUpdate:  0.436
 temporalUpdate: 10.0
