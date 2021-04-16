@@ -1,0 +1,12 @@
+<launch>
+    <param name="robot_description"
+           command="$(find xacro)/xacro '$(find locobot_description)/urdf/locobot.urdf.xacro'"/>
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+
+    <include file="$(find locobot_bringup)/launch/include/sensors.launch.xml"/>
+    <include file="$(find locobot_bringup)/launch/include/mobile_base.launch.xml"/>
+    <include file="$(find locobot_bringup)/launch/include/dynamixel.launch.xml"/>
+
+    <include file="$(find locobot_navigation)/launch/include/nav_stack.launch.xml"/>
+    <include file="$(find locobot_moveit_config)/launch/move_group.launch"/>
+</launch>

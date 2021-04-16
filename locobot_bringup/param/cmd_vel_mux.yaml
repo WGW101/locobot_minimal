@@ -1,0 +1,13 @@
+subscribers:
+    - name: "Safe reactive controller"
+      topic: "input/safety_controller"
+      timeout: 0.2
+      priority: 10
+    - name: "Tele-operation"
+      topic: "input/teleop"
+      timeout: 0.2
+      priority: 8
+    - name: "Autonomous navigation"
+      topic: "input/navi"
+      timeout: 0.2
+      priority: 1

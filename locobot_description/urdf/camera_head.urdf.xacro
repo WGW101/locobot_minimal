@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<robot name="locobot_camera_head" xmlns:xacro="http://ros.org/wiki/xacro">
+    <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro"/>
+
+    <link name="head_link"/>
+
+    <joint name="head_pan_joint" type="revolute">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <parent link="head_link"/>
+        <child link="head_pan_link"/>
+        <axis xyz="0 0 1"/>
+        <limit effort="1" velocity="1.0" lower="${-pi/2}" upper="${pi/2}"/>
+    </joint>
+    <transmission name="trans_head_pan">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="head_pan_joint">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="head_pan_motor">
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <link name="head_pan_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://locobot_description/meshes/camera_head_pan.STL"/>
+            </geometry>
+            <material name="">
+                <color rgba="0.25 0.25 0.25 1"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0.03" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.025 0.048 0.06"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0 0 0.03" rpy="0 0 0"/>
+            <mass value="0.018"/>
+            <inertia ixx="0.00001" ixy="0" ixz="0"
+                     iyy="0" iyz="0"
+                     izz="0"/>
+        </inertial>
+    </link>
+
+    <joint name="head_tilt_joint" type="revolute">
+        <origin xyz="0 0 0.046" rpy="0 0 0"/>
+        <parent link="head_pan_link"/>
+        <child link="head_tilt_link"/>
+        <axis xyz="0 1 0"/>
+        <limit effort="1" velocity="1.0" lower="${-pi/2}" upper="${pi/2}"/>
+    </joint>
+    <transmission name="trans_head_tilt">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="head_tilt_joint">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="head_tilt_motor">
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <link name="head_tilt_link">
+        <visual>
+            <origin xyz="0 0 0.004" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://locobot_description/meshes/camera_head_tilt.STL"/>
+            </geometry>
+            <material name="">
+                <color rgba="0.25 0.25 0.25 1"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.016 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.054 0.065 0.037"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0.016 0 0" rpy="0 0 0"/>
+            <mass value="0.055"/>
+            <inertia ixx="0.00001" ixy="0" ixz="0"
+                     iyy="0.00002" iyz="0"
+                     izz="0.00002"/>
+        </inertial>
+    </link>
+
+    <xacro:sensor_d435 parent="head_tilt_link">
+        <origin xyz="0.052 0 -0.013" rpy="0 0 0"/>
+    </xacro:sensor_d435>
+</robot>

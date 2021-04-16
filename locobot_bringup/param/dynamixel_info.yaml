@@ -1,0 +1,75 @@
+waist:
+    ID: 1
+    Return_Delay_Time: 0
+    Drive_Mode: 0
+    Profile_Acceleration: 40
+    Profile_Velocity: 40
+    Position_P_Gain: 550
+    Position_I_Gain: 0
+    Position_D_Gain: 0
+shoulder:
+    ID: 2
+    Return_Delay_Time: 0
+    Drive_Mode: 0
+    Profile_Acceleration: 40
+    Profile_Velocity: 40
+    Position_P_Gain: 400
+    Position_I_Gain: 3
+    Position_D_Gain: 0
+shoulder_2:
+    ID: 3
+    Return_Delay_Time: 0
+    Drive_Mode: 0
+    Profile_Acceleration: 40
+    Profile_Velocity: 40
+    Position_P_Gain: 400
+    Position_I_Gain: 3
+    Position_D_Gain: 0
+elbow:
+    ID: 4
+    Return_Delay_Time: 0
+    Drive_Mode: 0
+    Profile_Acceleration: 40
+    Profile_Velocity: 40
+    Position_P_Gain: 600
+    Position_I_Gain: 15
+    Position_D_Gain: 0
+wrist_angle:
+    ID: 5
+    Return_Delay_Time: 0
+    Drive_Mode: 0
+    Profile_Acceleration: 40
+    Profile_Velocity: 40
+    Position_P_Gain: 500
+    Position_I_Gain: 10
+    Position_D_Gain: 0
+wrist_rotate:
+    ID: 6
+    Return_Delay_Time: 0
+    Drive_Mode: 0
+    Profile_Acceleration: 40
+    Profile_Velocity: 40
+    Position_P_Gain: 400
+    Position_I_Gain: 0
+    Position_D_Gain: 0
+gripper:
+    ID: 7
+    Return_Delay_Time: 0
+    Drive_Mode: 0
+    Profile_Acceleration: 40
+    Profile_Velocity: 40
+    Position_P_Gain: 640
+    Position_I_Gain: 0
+    Position_D_Gain: 3600
+head_pan_joint:
+    ID: 8
+    Return_Delay_Time: 0
+    Drive_Mode: 0
+    Profile_Acceleration: 30
+    Profile_Velocity: 10
+head_tilt_joint:
+    ID: 9
+    Return_Delay_Time: 0
+    Drive_Mode: 0
+    Profile_Acceleration: 30
+    Profile_Velocity: 10

@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: locobot_description
+    relative_path: urdf/locobot.urdf.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/locobot.srdf
+  CONFIG:
+    author_name: Guillaume Bono
+    author_email: guillaume.bono@insa-lyon.fr
+    generated_timestamp: 1618487064

@@ -1,0 +1,12 @@
+<launch>
+    <include file="$(find realsense2_camera)/launch/rs_rgbd.launch"/>
+
+    <node pkg="hls_lfcd_lds_driver" type="hlds_laser_publisher" name="hlds_laser_publisher">
+        <param name="port" value="/dev/lds01"/>
+        <param name="frame_id" value="scan_link"/>
+    </node>
+    
+    <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filters">
+        <rosparam file="$(find locobot_bringup)/param/laser_filters.yaml"/>
+    </node>
+</launch>

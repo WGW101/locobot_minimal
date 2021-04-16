@@ -1,0 +1,8 @@
+<launch>
+    <param name="dynamixel_info" value="$(find locobot_bringup)/param/dynamixel_info.yaml"/>
+    <node pkg="dynamixel_workbench_controllers" type="dynamixel_workbench_controllers"
+          name="dynamixel_controller" args="/dev/dynamixel 1000000">
+        <param name="use_moveit" value="true"/>
+        <remap from="~joint_states" to="joint_states"/>
+    </node>
+</launch>

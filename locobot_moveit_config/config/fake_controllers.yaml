@@ -1,0 +1,22 @@
+controller_list:
+  - name: fake_arm_controller
+    joints:
+      - waist
+      - shoulder
+      - elbow
+      - wrist_angle
+      - wrist_rotate
+  - name: fake_gripper_controller
+    joints:
+      - left_finger
+  - name: fake_head_controller
+    joints:
+      - head_pan_joint
+      - head_tilt_joint
+initial:  # Define initial robot poses.
+  - group: arm
+    pose: Home
+  - group: gripper
+    pose: Closed
+  - group: head
+    pose: Home

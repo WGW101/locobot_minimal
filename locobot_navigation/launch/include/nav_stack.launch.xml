@@ -1,0 +1,38 @@
+<launch>
+    <arg name="use_saved_map" default="false"/>
+    <group if="$(arg use_saved_map)">
+        <arg name="map_file"/>
+        <node pkg="slam_toolbox" type="localization_slam_toolbox_node" name="slam_toolbox" output="screen">
+            <rosparam file="$(find locobot_navigation)/param/mapper_params_localization.yaml"/>
+            <param name="map_file_name" value="$(arg map_file)"/>
+            <remap from="scan" to="scan_filtered"/>
+        </node>
+    </group>
+    <group unless="$(arg use_saved_map)">
+        <node pkg="slam_toolbox" type="sync_slam_toolbox_node" name="slam_toolbox" output="screen">
+            <rosparam file="$(find locobot_navigation)/param/mapper_params_online_sync.yaml"/>
+            <remap from="scan" to="scan_filtered"/>
+        </node>
+    </group>
+
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+        <rosparam file="$(find locobot_navigation)/param/move_base.yaml"/>
+        <rosparam file="$(find locobot_navigation)/param/costmap_common.yaml" ns="global_costmap"/>
+        <rosparam file="$(find locobot_navigation)/param/global_costmap.yaml"/>
+        <rosparam file="$(find locobot_navigation)/param/global_planner.yaml"/>
+        <rosparam file="$(find locobot_navigation)/param/navfn_global_planner.yaml"/>
+        <rosparam file="$(find locobot_navigation)/param/costmap_common.yaml" ns="local_costmap"/>
+        <rosparam file="$(find locobot_navigation)/param/local_costmap.yaml"/>
+        <rosparam file="$(find locobot_navigation)/param/dwa_local_planner.yaml"/>
+
+        <param name="global_costmap/global_frame"     value="map"/>
+        <param name="global_costmap/robot_base_frame" value="base_footprint"/>
+        <param name="local_costmap/global_frame"      value="odom"/>
+        <param name="local_costmap/robot_base_frame"  value="base_footprint"/>
+        <param name="DWAPlannerROS/global_frame_id"   value="odom"/>
+
+        <remap from="cmd_vel" to="velocity_smoother/raw_cmd_vel"/>
+        <remap from="scan"    to="scan_filtered"/>
+    </node>
+</launch>
+
