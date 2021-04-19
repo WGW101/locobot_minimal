@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="move_base" type="move_base" name="move_base">
+        <rosparam file="$(find locobot_navigation)/param/nav_stack.yaml" />
+    </node>
+</launch>
