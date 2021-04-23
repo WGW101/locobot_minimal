@@ -10,7 +10,7 @@
 
   <exec_depend>xacro</exec_depend>
   <exec_depend>kobuki_description</exec_depend>
-  <exec_depend>interbotix_xsarms_descriptions</exec_depend>
+  <exec_depend>interbotix_xsarm_descriptions</exec_depend>
   <exec_depend>realsense2_description</exec_depend>
   <exec_depend>turtlebot3_description</exec_depend>
 
