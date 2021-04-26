@@ -46,6 +46,7 @@ rm -r interbotix_ros_core/interbotix_ros_uxarms/
 rm interbotix_ros_core/interbotix_ros_xseries/CATKIN_IGNORE
 rm -r interbotix_ros_toolboxes/interbotix_ux_toolbox/
 rm interbotix_ros_toolboxes/interbotix_xs_toolbox/CATKIN_IGNORE
+rm interbotix_ros_toolboxes/interbotix_common_toolbox/interbotix_moveit_interface/CATKIN_IGNORE
 rm -r interbotix_ros_core/interbotix_ros_xseries/dynamixel_workbench_toolbox/
 rm -r interbotix_ros_manipulators/interbotix_ros_uxarms/
 rm interbotix_ros_manipulators/interbotix_ros_xsarms/CATKIN_IGNORE
