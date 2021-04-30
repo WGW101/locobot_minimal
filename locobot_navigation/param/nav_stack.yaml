@@ -70,8 +70,8 @@ DWAPlannerROS:
     min_vel_x: 0.0
     max_vel_y: 0.0
     min_vel_y: 0.0
-    max_rot_vel: 3.0
-    min_rot_vel: 0.4
+    max_vel_theta: 3.0
+    min_vel_theta: 0.4
 
     yaw_goal_tolerance: 0.1
     xy_goal_tolerance: 0.15
@@ -108,7 +108,6 @@ local_costmap:
     transform_tolerance: 0.5
     update_frequency: 5.0
     publish_frequency: 0.0
-    static_map: false
     rolling_window: true
     width: 4.0
     height: 4.0

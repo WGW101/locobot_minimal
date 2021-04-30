@@ -8,5 +8,5 @@
     <include file="$(find locobot_bringup)/launch/include/dynamixel.launch.xml"/>
 
     <include file="$(find locobot_navigation)/launch/include/nav_stack.launch.xml"/>
-    <include file="$(find locobot_moveit_config)/launch/move_group.launch"/>
+    <!--<include file="$(find locobot_moveit_config)/launch/move_group.launch"/>-->
 </launch>
