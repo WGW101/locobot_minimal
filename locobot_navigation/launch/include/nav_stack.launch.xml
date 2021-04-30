@@ -27,7 +27,7 @@
         <param name="local_costmap/robot_base_frame"  value="base_footprint"/>
         <param name="DWAPlannerROS/global_frame_id"   value="odom"/>
 
-        <remap from="cmd_vel" to="velocity_smoother/raw_cmd_vel"/>
+        <remap from="cmd_vel" to="mobile_base/velocity_smoother/raw_cmd_vel"/>
         <remap from="scan"    to="scan_filtered"/>
     </node>
 </launch>
