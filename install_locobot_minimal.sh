@@ -26,6 +26,11 @@ rm -r kobuki/kobuki \
       kobuki/kobuki_bumper2pc \
       kobuki/kobuki_controller_tutorial \
       kobuki/kobuki_testsuite
+rm -r kobuki_desktop/kobuki_dashboard \
+      kobuki_desktop/kobuki_desktop \
+      kobuki_desktop/kobuki_gazebo \
+      kobuki_desktop/kobuki_qtestsuite \
+      kobuki_desktop/kobuki_rviz_launchers
 rm -r yujin_ocs/yocs_ar_marker_tracking \
       yujin_ocs/yocs_ar_pair_approach \
       yujin_ocs/yocs_ar_pair_tracking \

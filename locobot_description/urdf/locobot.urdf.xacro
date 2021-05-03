@@ -87,4 +87,6 @@
         <child link="head_link"/>
     </joint>
     <xacro:include filename="$(find locobot_description)/urdf/camera_head.urdf.xacro"/>
+
+    <xacro:include filename="$(find locobot_description)/urdf/locobot.gazebo.xacro"/>
 </robot>

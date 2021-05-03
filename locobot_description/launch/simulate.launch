@@ -1,0 +1,9 @@
+<launch>
+    <param name="robot_description"
+           command="$(find xacro)/xacro $(find locobot_description)/urdf/locobot.urdf.xacro"/>
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+    <include file="$(find locobot_control)/launch/controllers.launch"/>
+    <include file="$(find gazebo_ros)/launch/empty_world.launch"/>
+    <node pkg="gazebo_ros" type="spawn_model" name="urdf_spawner"
+          args="-urdf -param robot_description -model locobot"/>
+</launch>

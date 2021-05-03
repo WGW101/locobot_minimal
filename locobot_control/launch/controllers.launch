@@ -1,0 +1,5 @@
+<launch>
+    <rosparam file="$(find locobot_control)/param/controllers.yaml"/>
+    <node pkg="controller_manager" type="spawner" name="controller_spawner"
+          args="joint_state_controller head_controller arm_controller gripper_controller"/>
+</launch>
