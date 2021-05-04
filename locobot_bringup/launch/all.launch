@@ -1,4 +1,8 @@
+<?xml version="1.0"?>
 <launch>
+    <arg name="use_saved_map" default="false"/>
+    <arg name="map_file" if="$(arg use_saved_map)"/>
+
     <param name="robot_description"
            command="$(find xacro)/xacro '$(find locobot_description)/urdf/locobot.urdf.xacro'"/>
     <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
@@ -7,6 +11,9 @@
     <include file="$(find locobot_bringup)/launch/include/mobile_base.launch.xml"/>
     <include file="$(find locobot_bringup)/launch/include/dynamixel.launch.xml"/>
 
-    <include file="$(find locobot_navigation)/launch/include/nav_stack.launch.xml"/>
+    <include file="$(find locobot_navigation)/launch/include/nav_stack.launch.xml">
+        <arg name="use_saved_map" value="$(arg use_saved_map)"/>
+        <arg name="map_file" value="$(arg map_file)" if="$(arg use_saved_map)"/>
+    </include>
     <!--<include file="$(find locobot_moveit_config)/launch/move_group.launch"/>-->
 </launch>

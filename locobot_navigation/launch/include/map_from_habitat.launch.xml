@@ -1,9 +1,0 @@
-<launch>
-    <arg name="map_file"/>
-    <node pkg="map_server" type="map_server" name="map_server"
-          args="$(arg map_file)"/>
-    <node pkg="tf2_ros" type="static_transform_publisher" name="habitat_to_ros_map"
-          args="0 0 0 0.5 0.5 0.5 0.5 map habitat_map"/>
-    <node pkg="tf2_ros" type="static_transform_publisher" name="habitat_to_ros_base_link"
-          args="0 0 0 0.5 -0.5 -0.5 0.5 base_footprint habitat_base_footprint"/>
-</launch>

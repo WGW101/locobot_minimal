@@ -1,22 +1,31 @@
 <launch>
     <arg name="use_saved_map" default="false"/>
+    <arg name="map_file" if="$(arg use_saved_map)"/>
+
     <group if="$(arg use_saved_map)">
-        <arg name="map_file"/>
-        <node pkg="slam_toolbox" type="localization_slam_toolbox_node" name="slam_toolbox" output="screen">
+        <node pkg="slam_toolbox" type="localization_slam_toolbox_node" name="slam_toolbox"
+              output="screen" if="$(eval map_file.endswith('.posegraph'))">
             <rosparam file="$(find slam_toolbox)/config/mapper_params_localization.yaml"/>
             <param name="mode" value="localization"/>
             <param name="map_file_name" value="$(arg map_file)"/>
             <param name="max_laser_range" value="3.5"/>
             <remap from="scan" to="scan_filtered"/>
         </node>
+
+        <group if="$(eval map_file.endswith('.yaml'))">
+            <node pkg="map_server" type="map_server" name="map_server" args="$(arg map_file)"/>
+            <node pkg="amcl" type="amcl" name="amcl">
+                <param name="laser_max_range" value="3.5"/>
+            </node>
+        </group>
     </group>
-    <group unless="$(arg use_saved_map)">
-        <node pkg="slam_toolbox" type="sync_slam_toolbox_node" name="slam_toolbox" output="screen">
-            <rosparam file="$(find slam_toolbox)/config/mapper_params_online_sync.yaml"/>
-            <param name="max_laser_range" value="3.5"/>
-            <remap from="scan" to="scan_filtered"/>
-        </node>
-    </group>
+
+    <node pkg="slam_toolbox" type="sync_slam_toolbox_node" name="slam_toolbox"
+          output="screen" unless="$(arg use_saved_map)">
+        <rosparam file="$(find slam_toolbox)/config/mapper_params_online_sync.yaml"/>
+        <param name="max_laser_range" value="3.5"/>
+        <remap from="scan" to="scan_filtered"/>
+    </node>
 
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
         <rosparam file="$(find locobot_navigation)/param/nav_stack.yaml"/>
