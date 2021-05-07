@@ -2,8 +2,8 @@
 <launch>
     <arg name="use_saved_map" default="false"/>
     <arg name="map_file" if="$(arg use_saved_map)"/>
-    <arg name="habitat_to_ros_trans" default="0 0 0"/>
-    <arg name="habitat_to_ros_rot" default="-0.5 0.5 0.5 0.5"/>
+    <arg name="ros_to_habitat_trans" default="0 0 0"/>
+    <arg name="ros_to_habitat_rot" default="0.5 -0.5 -0.5 0.5"/>
 
     <param name="robot_description"
            command="$(find xacro)/xacro '$(find locobot_description)/urdf/locobot.urdf.xacro'"/>
@@ -20,7 +20,7 @@
     </include>
 
     <include file="$(find locobot_bringup)/launch/include/habitat_tf.launch.xml">
-        <arg name="habitat_to_ros_trans" value="$(arg habitat_to_ros_trans)"/>
-        <arg name="habitat_to_ros_rot" value="$(arg habitat_to_ros_rot)"/>
+        <arg name="ros_to_habitat_trans" value="$(arg ros_to_habitat_trans)"/>
+        <arg name="ros_to_habitat_rot" value="$(arg ros_to_habitat_rot)"/>
     </include>
 </launch>
