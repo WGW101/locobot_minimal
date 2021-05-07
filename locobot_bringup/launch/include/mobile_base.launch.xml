@@ -36,6 +36,5 @@
             <remap from="~robot_cmd_vel"  to="kobuki_node/commands/velocity"/>
             <remap from="~smooth_cmd_vel" to="cmd_vel_mux/input/navi"/>
         </node>
-        <!-- Also add a smoother for teleop? -->
     </group>
 </launch>
