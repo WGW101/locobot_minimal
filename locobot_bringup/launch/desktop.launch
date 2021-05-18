@@ -2,8 +2,4 @@
 <launch>
     <node pkg="rviz" type="rviz" name="rviz" required="true"
           args="-d $(find locobot_bringup)/param/navi.rviz"/>
-    <node pkg="locobot_bringup" type="scale_cmd_vel.py" name="scale_cmd_vel">
-        <param name="linear_scale" value="0.05"/>
-        <remap from="~out_vel" to="/mobile_base/cmd_vel_mux/input/teleop"/>
-    </node>
 </launch>
