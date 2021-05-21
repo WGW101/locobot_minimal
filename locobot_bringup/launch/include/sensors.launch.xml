@@ -1,5 +1,7 @@
 <launch>
-    <include file="$(find realsense2_camera)/launch/rs_rgbd.launch"/>
+    <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
+        <arg name="enable_pointcloud" value="true"/>
+    </include>
 
     <node pkg="hls_lfcd_lds_driver" type="hlds_laser_publisher" name="hlds_laser_publisher">
         <param name="port" value="/dev/ttyLDS01"/>
