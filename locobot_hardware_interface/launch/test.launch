@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+    <param name="robot_description"
+           command="$(find xacro)/xacro '$(find locobot_description)/urdf/locobot.urdf.xacro'"/>
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+
+    <node pkg="locobot_hardware_interface" type="locobot_controller_manager"
+          name="locobot_controller_manager"/>
+    <include file="$(find locobot_control)/launch/controllers.launch"/>
+</launch>
