@@ -128,7 +128,7 @@ local_costmap:
             raytrace_range: 3.0
             inf_is_valid: false
         pointcloud:
-            topic: "/camera/aligned_depth_to_color/points"
+            topic: "/camera/depth_registered/points"
             sensor_frame: "camera_color_optical_frame"
             observation_persistence: 10.0
             expected_update_rate: 15.0
