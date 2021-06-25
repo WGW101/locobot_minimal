@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>locobot_bringup</name>
-  <version>0.0.0</version>
+  <version>0.0.1</version>
   <description>The locobot_bringup package</description>
-  <maintainer email="wgw@todo.todo">wgw</maintainer>
-  <license>TODO</license>
+  <maintainer email="guillaume.bono@insa-lyon.fr">gbono</maintainer>
+  <license>MIT</license>
 
   <buildtool_depend>catkin</buildtool_depend>
 
