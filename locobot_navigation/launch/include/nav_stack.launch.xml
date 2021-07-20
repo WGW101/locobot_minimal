@@ -30,12 +30,6 @@
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
         <rosparam file="$(find locobot_navigation)/param/nav_stack.yaml"/>
 
-        <param name="global_costmap/global_frame"     value="map"/>
-        <param name="global_costmap/robot_base_frame" value="base_footprint"/>
-        <param name="local_costmap/global_frame"      value="odom"/>
-        <param name="local_costmap/robot_base_frame"  value="base_footprint"/>
-        <param name="DWAPlannerROS/global_frame_id"   value="odom"/>
-
         <remap from="cmd_vel" to="mobile_base/velocity_smoother/raw_cmd_vel"/>
         <remap from="scan"    to="scan_filtered"/>
     </node>

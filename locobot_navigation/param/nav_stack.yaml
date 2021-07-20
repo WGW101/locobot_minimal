@@ -54,13 +54,16 @@ global_costmap:
         publish_voxel_map: false
         footprint_clearing_enabled: true
     inflation_layer:
-        inflation_radius: 0.5
+        inflation_radius: 0.22 # prv 0.5
         cost_scaling_factor: 5.0
 
 
 base_local_planner: "dwa_local_planner/DWAPlannerROS"
 controller_frequency: 5.0
 DWAPlannerROS:
+    global_frame: "odom"
+    robot_base_frame: "base_footprint"
+
     acc_limit_x: 1.0
     acc_limit_y: 0.0
     acc_limit_th: 2.0
@@ -90,7 +93,7 @@ DWAPlannerROS:
     stop_time_buffer: 0.2
     scaling_speed: 0.25
     max_scaling_factor: 0.2
-    publish_cost_grid: false
+    publish_cost_grid: true
 
     oscillation_reset_dist: 0.05
 
@@ -150,23 +153,19 @@ local_costmap:
         publish_voxel_map: false
         footprint_clearing_enabled: true
     inflation_layer:
-        inflation_radius: 0.25
+        inflation_radius: 0.22 # prv 0.5
         cost_scaling_factor: 5.0
 
 
 recovery_behaviors:
-    - name: conservative_reset
-      type: clear_costmap_recovery/ClearCostmapRecovery
-    - name: rotate_recovery
-      type: rotate_recovery/RotateRecovery
     - name: aggressive_reset
       type: clear_costmap_recovery/ClearCostmapRecovery
 
 planner_patience: 5.0
-controller_patience: 15.0 # prv 3.0
+controller_patience: 20.0 # prv 3.0
 recovery_behavior_enabled: true
 conservative_reset_dist: 3.0
-clearing_rotation_allowed: true
+clearing_rotation_allowed: false
 shutdown_costmaps: false
 oscillation_timeout: 0.0
 oscillation_distance: 0.5
