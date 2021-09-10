@@ -19,7 +19,7 @@ global_costmap:
     robot_base_frame: "base_footprint"
     transform_tolerance: 0.5
     update_frequency: 1.0
-    publish_frequency: 0.0 # prv 0.5
+    publish_frequency: 0.5
     static_layer:
         unknown_cost_value: -1
         lethal_cost_value: 100
@@ -110,7 +110,7 @@ local_costmap:
     robot_base_frame: "base_footprint"
     transform_tolerance: 0.5
     update_frequency: 5.0
-    publish_frequency: 0.0 # prv 2.0
+    publish_frequency: 2.0
     rolling_window: true
     width: 4.0
     height: 4.0
