@@ -169,5 +169,5 @@ clearing_rotation_allowed: false
 shutdown_costmaps: false
 oscillation_timeout: 0.0
 oscillation_distance: 0.5
-planner_frequency: 0.0 # prv 1.0
+planner_frequency: 1.0
 max_planning_retries: -1

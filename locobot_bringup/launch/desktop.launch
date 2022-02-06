@@ -2,5 +2,7 @@
 <launch>
     <node pkg="rviz" type="rviz" name="rviz" required="true"
         args="-d $(find locobot_bringup)/param/navi.rviz"/>
-    <node pkg="rqt_robot_steering" type="rqt_robot_steering" name="teleop" required="true"/>
+    <node pkg="rqt_robot_steering" type="rqt_robot_steering" name="teleop" required="true">
+        <remap from="cmd_vel" to="/mobile_base/cmd_vel_mux/input/teleop"/>
+    </node>
 </launch>
